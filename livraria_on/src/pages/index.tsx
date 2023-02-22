@@ -17,7 +17,7 @@ export default function Home() {
       <main>
 
         <h1>rafinha test</h1>
-        <MyModal/>
+        
         <LivroLista/>
       </main>
     </>
