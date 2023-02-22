@@ -81,9 +81,9 @@ const LivroLista = (props: Props) => {
             <th></th>
             <th>Título</th>
             <th>Editora</th>
-            <th>Gênero</th>
+            
             <th>Autores</th>
-            <th>Ano de publicação</th>
+            
           </tr>
         </thead>
         <tbody>
