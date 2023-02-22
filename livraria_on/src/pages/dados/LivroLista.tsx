@@ -14,9 +14,9 @@ const LinhaLivro = (props: {livro: Livro, excluir: (codLivro: number) => void}) 
     const controladorEditora = new ControleEditora();
     
     async function fetchEditoraName() {
-      const nomeEditora = await controladorEditora.getNomeEditora(livro.codLivro);
-      if (nomeEditora) {
-        setNomeEditora(nomeEditora);
+      const nome = await controladorEditora.getNomeEditora(livro.codLivro);
+      if (nome) {
+        setNomeEditora(nome);
       }
     }
   
