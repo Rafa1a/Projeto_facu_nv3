@@ -24,6 +24,7 @@ const LinhaLivro = (props: {livro: Livro, excluir: (codLivro: number) => void}) 
   }, [livro.codLivro]);
    
   
+  console.log(livro)
   return (
     <tr key={livro.codLivro}>
       <td>
@@ -49,7 +50,7 @@ const LivroLista = (props: Props) => {
   const [carregado, setCarregado] = useState<boolean>(false);
 
   useEffect(() => {
-    
+     
     const getLivros = async () => {
       const livros = await obterLivros();
       const livrosComEditora = await Promise.all(

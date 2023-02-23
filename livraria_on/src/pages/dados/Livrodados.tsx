@@ -18,6 +18,8 @@ function LivroDados() {
   useEffect(() => {
     async function fetchOpcoes() {
       const editoras = await getEditoras();
+      console.log(editoras)
+      
       const opcoesFormatadas = editoras.map((editora) => ({
         value: editora.codEditora,
         text: editora.nome,
@@ -49,7 +51,7 @@ function LivroDados() {
     };
     incluirLivro(livro);
 
-    router.push(`/api/Livro/${livro.codigo}`);
+    router.push(`/`);
   }
 
   return (
