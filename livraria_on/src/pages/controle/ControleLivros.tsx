@@ -3,8 +3,10 @@ const baseURL = "http://localhost:3000/api/Livro"
 
 const obterLivros = async (): Promise<Array<Livro>>  => {
   const response = await fetch(baseURL)
-  const data = await response.json()
+  const data = [await response.json()]
+  
   return data
+  
 }
 
 export async function incluirLivro(livro: Livro): Promise<Livro> {

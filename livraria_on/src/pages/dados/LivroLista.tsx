@@ -17,6 +17,7 @@ const LinhaLivro = (props: {livro: Livro, excluir: (codLivro: number) => void}) 
       const nome = await getNomeEditora(livro.codLivro);
       if (nome) {
         setNomeEditora(nome);
+        if (typeof nome === 'object') return null;
       }
     }
   
@@ -24,21 +25,22 @@ const LinhaLivro = (props: {livro: Livro, excluir: (codLivro: number) => void}) 
   }, [livro.codLivro]);
    
   
-  console.log(livro)
+  
   return (
     <tr key={livro.codLivro}>
       <td>
         <button onClick={() => excluir(livro.codLivro)}>Excluir</button>
       </td>
       <td>{livro.titulo}</td>
-      <td>{nomeEditora}</td>
+      <td>{Object.keys(nomeEditora).length > 0 ? nomeEditora : 'Nenhuma Livro encontrada'}</td>
+
       <td>{livro.resumo}</td>
       <td>
-        <ul>
-          {livro.autores.map((autor, index) => (
-            <li key={index}>{autor}</li>
-          ))}
-        </ul>
+      <ul>
+      {livro.autores && livro.autores.map((autor, index) => (
+      <li key={index}>{autor}</li>
+        ))}
+      </ul>
       </td>
      
     </tr>
@@ -53,14 +55,17 @@ const LivroLista = (props: Props) => {
      
     const getLivros = async () => {
       const livros = await obterLivros();
-      const livrosComEditora = await Promise.all(
+      if(Object.keys(livros).length === 0){
+        console.log("nenhum livro encontrado")
+      }else
+      {const livrosComEditora = await Promise.all(
         livros.map(async (livro) => {
           const nomeEditora = await getNomeEditora(livro.codLivro);
           return { ...livro, nomeEditora };
         })
       );
       setLivros(livrosComEditora);
-      setCarregado(true);
+      setCarregado(true);}
     };
     getLivros();
   }, [carregado]);
@@ -87,10 +92,16 @@ const LivroLista = (props: Props) => {
           </tr>
         </thead>
         <tbody>
-          {livros.map((livro) => (
-            <LinhaLivro livro={livro} excluir={excluir} key={livro.codLivro} />
-          ))}
-        </tbody>
+  {livros.length > 0 ? (
+    livros.map((livro) => (
+      <LinhaLivro livro={livro} excluir={excluir} key={livro.codLivro} />
+    ))
+  ) : (
+    <tr>
+      <td colSpan={5}>Nenhum livro encontrado.</td>
+    </tr>
+  )}
+</tbody>
       </table>
     </main>
   );
