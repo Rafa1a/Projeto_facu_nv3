@@ -1,18 +1,40 @@
 import Livro from '../modelo/Livro';
-export function obterLivros(): Array<Livro> {
-  return [
-    { codigo: 1, codLivro: 1, titulo: 'Título 1', resumo: 'Resumo 1', autores: ['Autor 1'] },
-    { codigo: 2, codLivro: 2, titulo: 'Título 2', resumo: 'Resumo 2', autores: ['Autor 2'] },
-    { codigo: 3, codLivro: 3, titulo: 'Título 3', resumo: 'Resumo 3', autores: ['Autor 3'] }
-  ];
+const baseURL = "http://localhost:3000/api/livros"
+
+const obterLivros = async (): Promise<Livro[]>  => {
+  const response = await fetch(baseURL)
+  const data = await response.json()
+  return data
 }
 
-export function incluirLivro(livro: Livro): void {
-  const livros = obterLivros();
-  const novoCodigo = livros.reduce((maiorCodigo, livro) => {
-    return livro.codigo > maiorCodigo ? livro.codigo : maiorCodigo;
-  }, 0) + 1;
-  livro.codigo = novoCodigo;
-  livros.push(livro);
+export async function incluirLivro(livro: Livro): Promise<Livro> {
+  const response = await fetch(baseURL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(livro)
+  });
+
+  const data = await response.json();
+
+  if (Array.isArray(data) && data.length > 0) {
+    const novoCodigo = data.reduce((maiorCodigo: number, livro: Livro) => {
+      return livro.codigo > maiorCodigo ? livro.codigo : maiorCodigo;
+    }, 0) + 1;
+    livro.codigo = novoCodigo;
+  }
+
+  return livro;
 }
 
+  
+
+const excluirLivro = async (codigo: number) => {
+  const response = await fetch(`${baseURL}/${codigo}`, {
+    method: "DELETE"
+  })
+  const data = await response.json()
+  return data.ok
+}
+export {excluirLivro,obterLivros} 
