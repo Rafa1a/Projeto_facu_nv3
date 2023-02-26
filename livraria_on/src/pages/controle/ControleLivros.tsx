@@ -23,17 +23,20 @@ export async function incluirLivro(livro: Livro): Promise<Livro> {
   const data = await response.json();
   console.log('Dados retornados da inclusão do livro:', data);
 
-  if (Array.isArray(data) && data.length > 0) {
+  if (Array.isArray(data)) {
+  if (data.length > 0) {
     const novoCodigo = data.reduce((maiorCodigo: number, livro: Livro) => {
       return livro.codigo > maiorCodigo ? livro.codigo : maiorCodigo;
     }, 0) + 1;
     livro.codigo = novoCodigo;
     console.log('Livro incluído com sucesso:', livro);
   } else {
-    console.log('Erro ao incluir livro:', data);
+    console.log('Erro ao incluir livro: Nenhum livro foi retornado pela API');
   }
-
-  return livro;
+} else {
+  console.log('Erro ao incluir livro: A resposta da API não é um array');
+}
+return livro
 }
 
   

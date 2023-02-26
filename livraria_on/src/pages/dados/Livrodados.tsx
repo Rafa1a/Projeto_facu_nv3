@@ -14,30 +14,33 @@ function LivroDados() {
   const router = useRouter();
 
   const [opcoes, setOpcoes] = useState<Opcao[]>([]);
+  const [codEditora, setCodEditora] = useState(0);
+
 
   useEffect(() => {
-    async function fetchOpcoes() {
-      const editoras = await getEditoras();
-      console.log(editoras)
+  async function fetchOpcoes() {
+    const editoras = await getEditoras();
       
-      const opcoesFormatadas = editoras.map((editora) => ({
-        value: editora.codEditora,
-        text: editora.nome,
-      }));
-      setOpcoes(opcoesFormatadas);
-    }
+    const opcoesFormatadas = editoras.map((editora) => ({
+      value: editora.codEditora,
+      text: editora.nome,
+    }));
+    setOpcoes(opcoesFormatadas);
+    setCodEditora(opcoesFormatadas.length > 0 ? opcoesFormatadas[0].value : 0);
+  }
 
     fetchOpcoes();
-  }, []);
+    }, []);
 
   const [titulo, setTitulo] = useState("");
   const [resumo, setResumo] = useState("");
   const [autores, setAutores] = useState("");
-  const [codEditora, setCodEditora] = useState(opcoes.length > 0 ? opcoes[0].value : 0);
+  const [livrosCadastrados, setLivrosCadastrados] = useState<Livro[]>([]);
 
   function tratarCombo(event: React.ChangeEvent<HTMLSelectElement>) {
     setCodEditora(parseInt(event.target.value));
   }
+ 
 
   function incluir(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();

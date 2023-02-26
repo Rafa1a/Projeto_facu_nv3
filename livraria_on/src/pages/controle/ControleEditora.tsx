@@ -1,9 +1,15 @@
 import Editora from '../modelo/Editora';
 
 export async function getEditoras(): Promise<Array<Editora>> {
-  const response = await fetch('http://localhost:3000/api/Editora');
+  const response = await fetch(`http://localhost:3000/api/Editora`);
   const data = await response.json();
-  return data;
+
+  if (Array.isArray(data)) {
+    return data;
+  } else {
+    console.log('Erro ao obter editoras:', data);
+    return [];
+  }
 }
 
 export async function getNomeEditora(codEditora: number): Promise<string | undefined> {
