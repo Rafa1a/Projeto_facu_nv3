@@ -1,1 +1,17 @@
-[{"codigo":1,"titulo":"asdasd","resumo":"asdasdasdas","autores":["das"],"codLivro":0},{"codigo":3,"titulo":"asdasd","resumo":"asdasdasdas","autores":["das"],"codLivro":0}]
+[{  "codigo": 1,  "titulo": "1984",  "resumo": "Em um mundo controlado por um Estado totalitário, Winston Smith é um homem comum que começa a questionar sua vida, seus valores e sua própria existência.",  "autores": ["George Orwell"],
+  "codLivro": 0
+},
+{
+  "codigo": 2,
+  "titulo": "O Sol é Para Todos",
+  "resumo": "A história da defesa de um advogado branco que luta para inocentar um homem negro falsamente acusado de estupro em uma cidade racista dos Estados Unidos dos anos 1930.",
+  "autores": ["Harper Lee"],
+  "codLivro": 1
+},
+{
+  "codigo": 3,
+  "titulo": "O Apanhador no Campo de Centeio",
+  "resumo": "A história de Holden Caulfield, um jovem de dezesseis anos que acaba de ser expulso de uma escola preparatória e passa três dias em Nova York.",
+  "autores": ["J.D. Salinger"],
+  "codLivro": 0
+}]
