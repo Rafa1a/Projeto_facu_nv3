@@ -27,9 +27,9 @@ const LinhaLivro = (props: {livro: Livro, excluir: (codLivro: number) => void}) 
   
   
   return (
-    <tr key={livro.codLivro}>
+    <tr key={livro.codigo}>
       <td>
-        <button onClick={() => excluir(livro.codLivro)}>Excluir</button>
+        <button onClick={() => excluir(livro.codigo)}>Excluir</button>
       </td>
       <td>{livro.titulo}</td>
       <td>{Object.keys(nomeEditora).length > 0 ? nomeEditora : 'Nenhuma Editora encontrada'}</td>
@@ -71,10 +71,11 @@ const LivroLista = (props: Props) => {
   }, [carregado]);
 
  
-  const excluir = (codigo: number): void => {
-
-    const livrosAtualizados = livros.filter(livro => livro.codLivro !== codigo,0);
-    setLivros(livrosAtualizados);
+  const excluir = async (codigo: number)=> {
+    const result = await excluirLivro(codigo)
+    //const livrosAtualizados = livros.filter(livro => livro.codLivro !== codigo,0);
+    console.log(result)
+    setCarregado(false)
   }
   
 
@@ -95,7 +96,7 @@ const LivroLista = (props: Props) => {
         <tbody>
   {livros.length > 0 ? (
     livros.map((livro) => (
-      <LinhaLivro livro={livro} excluir={excluir} key={livro.codLivro} />
+      <LinhaLivro livro={livro} excluir={excluir} key={livro.codigo} />
     ))
   ) : (
     <tr>

@@ -30,13 +30,23 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
       // Identifica o maior código entre os dados já cadastrados
       const maioresCodigos = Object.keys(livros).map(Number).sort((a, b) => b - a);
+      
       const maiorCodigo = maioresCodigos.length > 0 ? maioresCodigos[0] : 0;
-
+      
       // Atribui o código do novo livro como o maior código mais um
-      novoLivro.codigo = maiorCodigo + 1;
+      if (maiorCodigo === 0 && livros.length === 0) {
+        novoLivro.codigo = maiorCodigo;
+      } else {
+        novoLivro.codigo = maiorCodigo + 1;
+      }
 
       // Adiciona o novo livro ao objeto JavaScript
       livros[novoLivro.codigo] = novoLivro;
+
+      // Substitui cada valor do código pelo valor do índice
+      livros.forEach((livro:Livro, indice:number) => {
+        livro.codigo = indice;
+      });
 
       // Converte o objeto JavaScript atualizado em uma string JSON
       const livroJsonStringAtualizado = JSON.stringify(livros);
@@ -44,7 +54,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       // Escreve a string JSON atualizada no arquivo livro.json
       await fs.promises.writeFile(LIVRO_JSON_PATH, livroJsonStringAtualizado);
 
-      console.log('Livro incluído com sucesso:', novoLivro);
+      console.log('Livro incluído com sucesso:', maiorCodigo, maioresCodigos);
 
       res.status(200).json(novoLivro);
     } catch (error) {
