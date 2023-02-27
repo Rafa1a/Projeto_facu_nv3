@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import fs from 'fs';
-import Livro from '@/pages/modelo/Livro';
+import Livro from 'public/modelo/Livro';
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'DELETE') {

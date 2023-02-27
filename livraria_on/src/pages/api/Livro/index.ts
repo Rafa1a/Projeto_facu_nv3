@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import controleL  from '../../controle/ControleLivros'
-import Livro from '../../modelo/Livro'
+import Livro from '../../../../public/modelo/Livro'
 import fs from 'fs'
 
 const LIVRO_JSON_PATH = './public/livro.json';

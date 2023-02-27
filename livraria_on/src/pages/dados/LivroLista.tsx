@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import controleL from "../controle/ControleLivros";
 
 
-import Livro from '../modelo/Livro';
+import Livro from '../../../public/modelo/Livro';
 import  controleE  from "../controle/ControleEditora";
 
 
