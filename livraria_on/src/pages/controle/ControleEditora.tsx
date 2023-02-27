@@ -1,7 +1,7 @@
 import Editora from '../modelo/Editora';
 const baseURL = `http://localhost:3000/editora.json`
 
-export async function getEditoras(): Promise<Array<Editora>> {
+ async function getEditoras(): Promise<Array<Editora>> {
   const response = await fetch(baseURL);
   const data = await response.json();
 
@@ -13,7 +13,7 @@ export async function getEditoras(): Promise<Array<Editora>> {
   }
 }
 
-export async function getNomeEditora(codEditora: number): Promise<string | undefined> {
+ async function getNomeEditora(codEditora: number): Promise<string | undefined> {
   const response = await fetch(baseURL, {
     method: "GET"
   });
@@ -24,3 +24,4 @@ export async function getNomeEditora(codEditora: number): Promise<string | undef
 }
 
 
+export default {getEditoras,getNomeEditora}

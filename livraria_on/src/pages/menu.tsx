@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export const Menu: React.FC = () => {
+ const Menu: React.FC = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
@@ -33,3 +33,4 @@ export const Menu: React.FC = () => {
     </nav>
   );
 };
+export default Menu

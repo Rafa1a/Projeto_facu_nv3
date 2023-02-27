@@ -14,7 +14,7 @@ async function obterLivros() {
 }
 
 
-export async function incluirLivro(livro: Livro): Promise<Livro> {
+ async function incluirLivro(livro: Livro): Promise<Livro> {
   
   // 1. Faz a requisição HTTP para adicionar o livro
   const response = await fetch(baseURL, {
@@ -39,4 +39,4 @@ const excluirLivro = async (codigo: number) => {
   const data = await response.json()
   return data.ok
 }
-export {excluirLivro,obterLivros} 
+export default {excluirLivro, obterLivros, incluirLivro}

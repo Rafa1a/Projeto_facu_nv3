@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import {obterLivros,excluirLivro} from "../controle/ControleLivros";
+import controleL from "../controle/ControleLivros";
+
+
 import Livro from '../modelo/Livro';
-import  {getNomeEditora}  from "../controle/ControleEditora";
+import  controleE  from "../controle/ControleEditora";
 
 
 type Props = {}
@@ -14,7 +16,7 @@ const LinhaLivro = (props: {livro: Livro, excluir: (codLivro: number) => void}) 
     
     
     async function fetchEditoraName() {
-      const nome = await getNomeEditora(livro.codLivro);
+      const nome = await controleE.getNomeEditora(livro.codLivro);
       if (nome) {
         setNomeEditora(nome);
         if (typeof nome === 'object') return null;
@@ -54,13 +56,13 @@ const LivroLista = (props: Props) => {
   useEffect(() => {
      
     const getLivros = async () => {
-      const livros = await obterLivros();
+      const livros = await controleL.obterLivros();
       if(Object.keys(livros).length === 0){
         console.log("nenhum livro encontrado")
       }else
       {const livrosComEditora = await Promise.all(
         livros.map(async (livro:Livro) => {
-          const nomeEditora = await getNomeEditora(livro.codLivro);
+          const nomeEditora = await controleE.getNomeEditora(livro.codLivro);
           return { ...livro, nomeEditora };
         })
       );
@@ -72,7 +74,7 @@ const LivroLista = (props: Props) => {
 
  
   const excluir = async (codigo: number)=> {
-    const result = await excluirLivro(codigo)
+    const result = await controleL.excluirLivro(codigo)
     //const livrosAtualizados = livros.filter(livro => livro.codLivro !== codigo,0);
     console.log(result)
     setCarregado(false)

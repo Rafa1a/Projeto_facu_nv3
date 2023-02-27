@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { incluirLivro } from "../controle/ControleLivros";
+import  controleL  from "../controle/ControleLivros";
 
-import { getEditoras } from "../controle/ControleEditora";
+import  controleE  from "../controle/ControleEditora";
 
 
 interface Opcao {
@@ -19,7 +19,7 @@ function LivroDados() {
 
   useEffect(() => {
   async function fetchOpcoes() {
-    const editoras = await getEditoras();
+    const editoras = await controleE.getEditoras();
       
     const opcoesFormatadas = editoras.map((editora) => ({
       value: editora.codEditora,
@@ -53,7 +53,7 @@ function LivroDados() {
       codLivro: codEditora,
     };
     router.push("/")
-    incluirLivro(livro);
+    controleL.incluirLivro(livro);
     
     ;
   }

@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { obterLivros, incluirLivro } from '../../controle/ControleLivros'
+import controleL  from '../../controle/ControleLivros'
 import Livro from '../../modelo/Livro'
 import fs from 'fs'
 
@@ -8,7 +8,7 @@ const LIVRO_JSON_PATH = './public/livro.json';
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'GET') {
     try {
-      const livrosJson = await obterLivros()
+      const livrosJson = await controleL.obterLivros()
 
       const livros: Livro[] = Object.values(livrosJson)
 

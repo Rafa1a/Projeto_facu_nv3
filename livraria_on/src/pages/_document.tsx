@@ -1,5 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document'
-import { Menu } from './menu'
+import  Menu  from './menu'
 export default function Document() {
   return (
     <Html lang="pt-br">

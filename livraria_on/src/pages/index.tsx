@@ -1,10 +1,8 @@
 import Head from 'next/head'
-
 import { Inter } from '@next/font/google'
-import LivroLista from './dados/LivroLista'
-import MyModal from './modelo/testes'
+
 const inter = Inter({ subsets: ['latin'] })
- import LivroDados from './dados/Livrodados'
+ 
 
 export default function Home() {
   return (
