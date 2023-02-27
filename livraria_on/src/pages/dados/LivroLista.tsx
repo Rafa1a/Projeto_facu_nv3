@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import {obterLivros, incluirLivro, excluirLivro} from "../controle/ControleLivros";
+import {obterLivros,excluirLivro} from "../controle/ControleLivros";
 import Livro from '../modelo/Livro';
-import  {getEditoras,getNomeEditora}  from "../controle/ControleEditora";
-import Editora from '../modelo/Editora';
+import  {getNomeEditora}  from "../controle/ControleEditora";
+
 
 type Props = {}
 
@@ -29,7 +29,7 @@ const LinhaLivro = (props: {livro: Livro, excluir: (codLivro: number) => void}) 
   return (
     <tr key={livro.codigo}>
       <td>
-        <button onClick={() => excluir(livro.codigo)}>Excluir</button>
+        <button onClick={() => excluir(livro.codigo)} className="btn btn-danger">Excluir</button>
       </td>
       <td>{livro.titulo}</td>
       <td>{Object.keys(nomeEditora).length > 0 ? nomeEditora : 'Nenhuma Editora encontrada'}</td>
@@ -82,7 +82,7 @@ const LivroLista = (props: Props) => {
   return (
     <main>
       <h1>Livros</h1>
-      <table>
+      <table className="table">
         <thead>
           <tr>
             <th></th>
