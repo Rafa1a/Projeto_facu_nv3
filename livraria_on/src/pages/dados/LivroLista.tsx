@@ -32,7 +32,7 @@ const LinhaLivro = (props: {livro: Livro, excluir: (codLivro: number) => void}) 
         <button onClick={() => excluir(livro.codLivro)}>Excluir</button>
       </td>
       <td>{livro.titulo}</td>
-      <td>{Object.keys(nomeEditora).length > 0 ? nomeEditora : 'Nenhuma Livro encontrada'}</td>
+      <td>{Object.keys(nomeEditora).length > 0 ? nomeEditora : 'Nenhuma Editora encontrada'}</td>
 
       <td>{livro.resumo}</td>
       <td>
@@ -59,7 +59,7 @@ const LivroLista = (props: Props) => {
         console.log("nenhum livro encontrado")
       }else
       {const livrosComEditora = await Promise.all(
-        livros.map(async (livro) => {
+        livros.map(async (livro:Livro) => {
           const nomeEditora = await getNomeEditora(livro.codLivro);
           return { ...livro, nomeEditora };
         })
@@ -98,7 +98,7 @@ const LivroLista = (props: Props) => {
     ))
   ) : (
     <tr>
-      <td colSpan={5}>Nenhum livro encontrado.</td>
+      <td colSpan={5}></td>
     </tr>
   )}
 </tbody>
