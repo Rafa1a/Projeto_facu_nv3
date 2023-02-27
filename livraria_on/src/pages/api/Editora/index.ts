@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import controleE from "../../controle/ControleEditora";
+import controleE from "../../../../public/controle/ControleEditora";
 
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {

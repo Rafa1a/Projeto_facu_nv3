@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import  controleL  from "../controle/ControleLivros";
+import  controleL  from "../../../public/controle/ControleLivros";
 
-import  controleE  from "../controle/ControleEditora";
+import  controleE  from "../../../public/controle/ControleEditora";
 
 
 interface Opcao {

@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import controleL  from '../../controle/ControleLivros'
+import controleL  from '../../../../public/controle/ControleLivros'
 import Livro from '../../../../public/modelo/Livro'
 import fs from 'fs'
 

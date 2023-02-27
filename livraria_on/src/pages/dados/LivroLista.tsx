@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import controleL from "../controle/ControleLivros";
+import controleL from "../../../public/controle/ControleLivros";
 
 
 import Livro from '../../../public/modelo/Livro';
-import  controleE  from "../controle/ControleEditora";
+import  controleE  from "../../../public/controle/ControleEditora";
 
 
 type Props = {}
