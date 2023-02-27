@@ -1,7 +1,7 @@
 import Livro from '../modelo/Livro';
 
-const baseURL = "http://localhost:3000/api/Livro"
-const baseURLjson = "http://localhost:3000/livro.json"
+const baseURL = "https://projeto-facu-nv3.vercel.app/api/Livro"
+const baseURLjson = "https://projeto-facu-nv3.vercel.app/livro.json"
 
 
 

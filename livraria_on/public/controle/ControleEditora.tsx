@@ -1,5 +1,5 @@
 import Editora from '../modelo/Editora';
-const baseURL = `http://localhost:3000/editora.json`
+const baseURL = `https://projeto-facu-nv3.vercel.app/editora.json`
 
  async function getEditoras(): Promise<Array<Editora>> {
   const response = await fetch(baseURL);
