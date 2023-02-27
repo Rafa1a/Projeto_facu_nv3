@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import {obterLivros, incluirLivro} from "../controle/ControleLivros";
+import {obterLivros, incluirLivro, excluirLivro} from "../controle/ControleLivros";
 import Livro from '../modelo/Livro';
 import  {getEditoras,getNomeEditora}  from "../controle/ControleEditora";
-
+import Editora from '../modelo/Editora';
 
 type Props = {}
 
@@ -72,7 +72,8 @@ const LivroLista = (props: Props) => {
 
  
   const excluir = (codigo: number): void => {
-    const livrosAtualizados = livros.filter(livro => livro.codLivro !== codigo);
+
+    const livrosAtualizados = livros.filter(livro => livro.codLivro !== codigo,0);
     setLivros(livrosAtualizados);
   }
   

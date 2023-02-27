@@ -1,7 +1,1 @@
-[{
-    "codigo": 0,
-    "codLivro": 0,
-    "titulo": "qualquercoisa",
-    "resumo": "asdhashdahsda",
-    "autores": ["atuasdsa1", "tautut2"]
-}]
+[{"codigo":0,"codLivro":1,"titulo":"rafinha","resumo":"creu creu","autores":["c","4"]},{"codigo":1,"titulo":"rafa2","resumo":"vcvcvc","autores":["vcvc"],"codLivro":0},{"codigo":2,"titulo":"rafa3","resumo":"vcvcvc","autores":["vcvc"],"codLivro":0},{"codigo":3,"titulo":"aaa","resumo":"aavvvv","autores":["bbbbb","bbbb","bb"],"codLivro":1}]

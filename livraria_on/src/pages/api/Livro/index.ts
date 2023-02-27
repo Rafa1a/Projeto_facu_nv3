@@ -1,7 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { obterLivros, incluirLivro,atualizarLivro } from '../../controle/ControleLivros'
+import { obterLivros, incluirLivro } from '../../controle/ControleLivros'
 import Livro from '../../modelo/Livro'
+import fs from 'fs'
 
+const LIVRO_JSON_PATH = './public/livro.json';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'GET') {
@@ -17,25 +19,36 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
   } else if (req.method === 'POST') {
     try {
-      const livro = req.body
-      const novoLivro = await incluirLivro(livro)
+      const novoLivro: Livro = req.body;
+     
 
-      res.status(200).json({ message: 'Livro incluído com sucesso!', livro: novoLivro })
-      
+      // Lê o conteúdo do arquivo livro.json
+      const livroJsonString = await fs.promises.readFile(LIVRO_JSON_PATH, 'utf-8');
+
+      // Converte o conteúdo lido em um objeto JavaScript
+      const livros = JSON.parse(livroJsonString);
+
+      // Identifica o maior código entre os dados já cadastrados
+      const maioresCodigos = Object.keys(livros).map(Number).sort((a, b) => b - a);
+      const maiorCodigo = maioresCodigos.length > 0 ? maioresCodigos[0] : 0;
+
+      // Atribui o código do novo livro como o maior código mais um
+      novoLivro.codigo = maiorCodigo + 1;
+
+      // Adiciona o novo livro ao objeto JavaScript
+      livros[novoLivro.codigo] = novoLivro;
+
+      // Converte o objeto JavaScript atualizado em uma string JSON
+      const livroJsonStringAtualizado = JSON.stringify(livros);
+
+      // Escreve a string JSON atualizada no arquivo livro.json
+      await fs.promises.writeFile(LIVRO_JSON_PATH, livroJsonStringAtualizado);
+
+      console.log('Livro incluído com sucesso:', novoLivro);
+
+      res.status(200).json(novoLivro);
     } catch (error) {
       res.status(500).json({ message: 'Erro ao incluir livro: ' + error })
     }
-  } else if (req.method === 'PUT') {
-    try {
-      const livro = req.body
-      const livroAtualizado = await atualizarLivro(livro)
-
-      res.status(200).json({ message: 'Livro atualizado com sucesso!', livro: livroAtualizado })
-      
-    } catch (error) {
-      res.status(500).json({ message: 'Erro ao atualizar livro: ' + error })
-    }
-  } else {
-    res.status(405).json({ message: 'Método não permitido' })
   }
 }

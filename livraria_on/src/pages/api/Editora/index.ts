@@ -2,17 +2,12 @@ import { NextApiRequest, NextApiResponse } from "next";
 import {getEditoras} from "../../controle/ControleEditora";
 import Editora from '../../modelo/Editora';
 
-export default (req: NextApiRequest, res: NextApiResponse) => {
-  const novaseditoras : Editora[] = [{
-    codEditora: 0,
-    nome: 'editora1' 
-  },{codEditora: 1,
-    nome: 'editora2' }
-  ]
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+  
   
   if (req.method === "GET") {
-   
-    res.status(200).json(novaseditoras)
+    const editoras = await getEditoras()
+    res.status(200).json(editoras)
   } else {
     res.status(405).end();
   }

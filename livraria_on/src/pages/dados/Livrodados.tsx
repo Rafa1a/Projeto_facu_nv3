@@ -52,9 +52,10 @@ function LivroDados() {
       autores: autores.split("\n"),
       codLivro: codEditora,
     };
+    
     incluirLivro(livro);
 
-    router.push(`/`);
+    ;
   }
 
   return (
